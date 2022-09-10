@@ -15,7 +15,7 @@ cout << dat.size() << endl;
 
 
 //dat.push_back("2");
-dat.push_front("2");
+dat.push_front("2"); 
 cout << dat.size() << endl;
 dat.pop_back(); //tests pop back when removes only item and checks if it deletes
 cout << dat.size() << endl;
@@ -34,15 +34,15 @@ cout << dat.size() << endl;
 //dat.push_front("1");
 dat.push_front("7");  //push front when empty
 dat.push_back("8"); //creates new item
-dat.push_front("9");
+dat.push_front("9"); //push front reg
 // dat.push_back("7"); //[push back when empty]
 // dat.push_front("8"); //creates new item
-// dat.push_back("9");
+// dat.push_back("9"); //push back reg
 
 
-cout << dat.front() <<endl;
-cout << dat.back() << endl;
-cout << dat.get(0) << " " << dat.get(1) << " " << dat.get(2) << endl;
+cout << dat.front() <<endl; //tests front
+cout << dat.back() << endl; //tests back
+cout << dat.get(0) << " " << dat.get(1) << " " << dat.get(2) << endl; //tests get and locVal function
 // prints: 8 7 9
 
 

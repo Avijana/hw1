@@ -40,7 +40,7 @@ void ULListStr::push_back(const std::string& val)
 		// this->head = 
 	}
 
-	else if(tail_->last == 10)
+	else if(tail_->last == 10) //creates a new item to push back into
 	{
 		size_++;
 		Item *temp = new Item(); 
@@ -52,7 +52,7 @@ void ULListStr::push_back(const std::string& val)
 		tail_ = temp;
 	}
 
-	else if(tail_->last != 10)
+	else if(tail_->last != 10) //push back normally
 	{
 		tail_->val[tail_->last] = val;
 		tail_->last++;
@@ -75,7 +75,7 @@ void ULListStr::push_front(const std::string& val)
 		// this->head = 
 	}
 
-	else if(head_->first == 0)
+	else if(head_->first == 0) //creates new item to push front
 	{
 		size_++;
 		Item *temp = new Item(); 
@@ -89,7 +89,7 @@ void ULListStr::push_front(const std::string& val)
 		head_ = temp;
 	}
 
-	else if(head_->first != 0)
+	else if(head_->first != 0) //push front normally
 	{
 		head_->val[head_->first-1] = val;
 		head_->first--;
@@ -107,7 +107,13 @@ void ULListStr::pop_back()
  //	tail_->val[tail_->last-1] = NULL;
 	tail_->last--;
 
-	if(tail_->last == 0)
+	if(head_==tail_ && tail_->last==tail_->first) //checks if pop makes the single item empty
+	{
+		delete head_;
+		head_ = NULL;
+		tail_ = NULL;
+	}
+	else if(tail_->last == tail_->first) //deletes item if empty
 	{
 	tail_ = tail_->prev;
 	delete tail_->next;
@@ -129,11 +135,18 @@ void ULListStr::pop_front()
 		head_->first++;
 	
 
-	if(head_->first == 10)
+	if(head_==tail_ && head_->first == head_->last) //checks if last and only item is empty and deletes
 	{
-	head_ = head_->next;
-	delete head_->prev;
-	head_->prev = NULL;
+		delete head_;
+		head_ = NULL;
+		tail_ = NULL;
+	}
+
+	else if(head_->first == head_->last) //deletes item if empty
+	{
+		head_ = head_->next;
+		delete head_->prev;
+		head_->prev = NULL;
 	}
 	size_--;
 }
@@ -158,11 +171,17 @@ std::string const & ULListStr::front() const
 
 std::string* ULListStr::getValAtLoc(size_t loc) const
 {
-	Item *temp = new Item(); 
+	if(head_==NULL) //if no items exist returns null
+	{
+		return NULL;
+	}
+
+	Item *temp = NULL; 
 	temp = head_;
+	
 	unsigned int i = 0;
 	
-	for(i = head_->first; loc != 0; loc--)
+	for(i = head_->first; loc != 0; loc--) //counts down number of moves from start based on index of location
 	{
 		if(loc == 0)
 		{

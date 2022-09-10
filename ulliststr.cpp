@@ -48,7 +48,7 @@ void ULListStr::push_back(const std::string& val)
 		temp->last = 1;
 		tail_->next = temp;
 		temp->prev = tail_;
-		temp->next NULL;
+		temp->next = NULL;
 		tail_ = temp;
 	}
 
@@ -80,11 +80,11 @@ void ULListStr::push_front(const std::string& val)
 		size_++;
 		Item *temp = new Item(); 
   	temp->val[9] = val;
-		temp->first = 9
+		temp->first = 9;
 		temp->last = 10;
 
 		head_->prev = temp;
-		temp->next = head_
+		temp->next = head_;
 		temp->prev = NULL;
 		head_ = temp;
 	}
@@ -104,7 +104,7 @@ void ULListStr::pop_back()
 		return;
 	}
 
-	tail_->val[tail_->last-1] = NULL;
+ //	tail_->val[tail_->last-1] = NULL;
 	tail_->last--;
 
 	if(tail_->last == 0)
@@ -125,7 +125,7 @@ void ULListStr::pop_front()
 		return;
 	}
 
-		head_->val[head_->first] = NULL;
+		//head_->val[head_->first] = NULL;
 		head_->first++;
 	
 
@@ -142,7 +142,7 @@ void ULListStr::pop_front()
    * Returns a const reference to the back element
    *   - MUST RUN in O(1)
    */
-std::string const & back() const
+std::string const & ULListStr::back() const
 {
 	return tail_->val[tail_->last-1];
 }
@@ -151,31 +151,41 @@ std::string const & back() const
    * Returns a const reference to the front element
    *   - MUST RUN in O(1)
    */
-std::string const & front() const
+std::string const & ULListStr::front() const
 {
-	return head_->val[head->first];
+	return head_->val[head_->first];
 }
 
-std::string* getValAtLoc(size_t loc) const
+std::string* ULListStr::getValAtLoc(size_t loc) const
 {
 	Item *temp = new Item(); 
 	temp = head_;
-	for(int i = head_->first; loc != 0; loc--)
+	unsigned int i = 0;
+	
+	for(i = head_->first; loc != 0; loc--)
 	{
-		if(i == temp->last-1)
+		if(loc == 0)
+		{
+			break;
+		}
+
+		// if(loc == 0)
+		// {
+		// 	return &(temp->val[i]);
+		// }
+
+		if(i == (temp->last)-1)
 		{
 			i = 0;
 			temp = temp->next;
 		}
-		if(loc-1 == 0)
-		{
-			return temp->val[i];
-		}
+		
 		else
 		{
 			i++;
 		}
 	}
+	return &(temp->val[i]);
 }
 	
 
